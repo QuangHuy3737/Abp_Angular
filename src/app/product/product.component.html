@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-lg-12 col-lg-12">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id {{idRouter}}</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>{{productRouter.id}}</td>
+                            <td {{productRouter.name}}></td>
+                            <td {{productRouter.quantity}}></td>
+                        </tr> -->
+                        <tr>
+                            <td>
+                                <input class="form-control" type="text" [(ngModel)]="idFilter">
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" [(ngModel)]="nameFilter">
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" [(ngModel)]="quantityFilter">
+                            </td>
+                        </tr>
+                        <tr *ngFor="let pr of products | filter : idFilter : nameFilter :  quantityFilter">
+                            <td (click)="populateForm(pr)">{{pr.id}}</td>
+                            <td (click)="populateForm(pr)">{{pr.name}}</td>
+                            <td (click)="populateForm(pr)">{{pr.quantity }}</td>
+                            <div>
+                                <button class="btn btn-warning" (click)="onDelete(pr)">Delete</button>
+                                <button class="btn btn-success" (click)="onUpdateTable(pr)">Update</button>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div clas="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Reactive Form</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form [formGroup]="formProduct">
+                                <div class="form-group">
+                                    <label>Name  </label>
+                                    <input formControlName="name" type="text" class="form-control" [(ngModel)]="p1.name" [(ngModel)]="p2.name" [(ngModel)]="nameQueryParam" [(ngModel)]="p3.name">
+                                    <app-error-validate [control]="formProduct.controls.name" [name-control]="'Name'"></app-error-validate>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantity </label>
+                                    <input formControlName="quantity" type="text" class="form-control" [(ngModel)]="p1.quantity" [(ngModel)]="p2.quantity" [(ngModel)]="quantityQueryParam" [(ngModel)]="p3.quantity">
+                                    <app-error-validate [control]="formProduct.controls.quantity" [name-control]="'Quantity'"></app-error-validate>
+
+                                </div>
+                                <button class="btn btn-success" type="submit" [disabled]="formProduct.invalid" (click)="onSubmit()">Save</button>
+                                <button class="btn btn-success" type="submit" [disabled]="formProduct.invalid" (click)="onUpdate(p3)">Update</button>
+                                <button class="btn btn-success" type="submit" [routerLink]="['/product']" [queryParams]="{name: nameQueryParam ,quantity:quantityQueryParam}">Check Router</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

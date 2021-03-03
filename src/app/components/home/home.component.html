@@ -1,0 +1,5 @@
+<h1>Home Component</h1>
+
+<input type="text" class="form-control" placeholder="Vui Long Nhap Password" #key>
+<span class="label label-danger" *ngIf="error">Mat khau khong chinh xac</span>
+<button type="button" class="btn btn-default" (click)="onAccess(key.value)">Access</button>
